@@ -387,7 +387,11 @@ describe Bcdatabase do
     describe "the yaml for a valid reference" do
       before do
         @yaml = @bcdb.development(:scran, :jim)
-        @actual = YAML.load(@yaml)
+        begin
+          @actual = YAML.load(@yaml, aliases: true)
+        rescue ArgumentError
+          @actual = YAML.load(@yaml)
+        end
       end
 
       it "isn't a separated YAML doc" do

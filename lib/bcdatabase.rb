@@ -173,7 +173,11 @@ module Bcdatabase
       @map = { }
       files.each do |filename|
         name = File.basename(filename).gsub(/\.ya?ml/, '')
-        @map[name] = YAML.load(File.open(filename))
+        begin
+          @map[name] = YAML.load(File.open(filename), aliases: true)
+        rescue ArgumentError
+          @map[name] = YAML.load(File.open(filename))
+        end
       end
     end
 
