@@ -49,7 +49,13 @@ module Bcdatabase::Commands
     end
 
     shared_examples 'general behavior' do
-      let(:yaml_output) { YAML.load(output) }
+      let(:yaml_output) {
+        begin
+          YAML.load(output, aliases: true)
+        rescue ArgumentError
+          YAML.load(output)
+        end
+      }
 
       it 'reads from the appropriate input' do
         output.should =~ /wh:/

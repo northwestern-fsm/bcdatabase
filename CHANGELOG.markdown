@@ -1,6 +1,10 @@
 Bcdatabase history
 ==================
 
+1.2.7
+-----
+- Update loading YAML to support Psych >= 4
+
 1.2.6
 -----
 - Re-restrict highline dependency. Even though the identified issue was fixed,

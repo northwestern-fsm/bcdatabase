@@ -28,9 +28,11 @@ module Bcdatabase::Commands
       let(:read_opts) {
         if RUBY_VERSION > '1.9'
           { :encoding => 'ASCII-8BIT' }
+        else
+          {}
         end
       }
-      let(:keyfile_contents) { File.read(keyfile, read_opts) }
+      let(:keyfile_contents) { File.read(keyfile, **read_opts) }
 
       before do
         ENV['BCDATABASE_PASS'] = keyfile.to_s
